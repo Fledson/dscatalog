@@ -14,7 +14,10 @@ public class Category implements Serializable {
     private String name;
 
     public Category() {
+    }
 
+    public Category(String name) {
+        this.name = name;
     }
 
     public Category(Long id, String name) {
