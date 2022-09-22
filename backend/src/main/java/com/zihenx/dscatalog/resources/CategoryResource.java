@@ -2,6 +2,7 @@ package com.zihenx.dscatalog.resources;
 
 import com.zihenx.dscatalog.dto.CategoryDTO;
 import com.zihenx.dscatalog.services.CategoryService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +45,12 @@ public class CategoryResource {
     public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto){
         dto = service.update(id, dto);
         return  ResponseEntity.ok().body(dto);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete (@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build(); // status 204 - resposta deu certo porem não possui corpo na requisição
     }
 
 }
