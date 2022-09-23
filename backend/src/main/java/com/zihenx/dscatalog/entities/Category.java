@@ -50,10 +50,11 @@ public class Category implements Serializable {
         this.name = name;
     }
 
+    // para auditoria
     public Instant getCreatedAt() {
         return createdAt;
     }
-
+    // para auditoria
     public Instant getUpdatedAt() {
         return updatedAt;
     }
