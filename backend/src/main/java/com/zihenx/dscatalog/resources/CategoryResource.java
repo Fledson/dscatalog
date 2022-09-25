@@ -27,6 +27,7 @@ public class CategoryResource {
         @RequestParam(value = "direction", defaultValue = "ASC") String direction,
         @RequestParam(value = "orderBy", defaultValue = "name") String orderBy
         ) {
+        // definindo paramentros de paginação
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
 
         Page<CategoryDTO> list = service.findAllPaged(pageRequest);
@@ -59,7 +60,7 @@ public class CategoryResource {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete (@PathVariable Long id) {
         service.delete(id);
-        return ResponseEntity.noContent().build(); // status 204 - resposta deu certo porem não possui corpo na requisição
+        return ResponseEntity.noContent().build(); // status 204: resposta deu certo porem não possui corpo na requisição
     }
 
 }
