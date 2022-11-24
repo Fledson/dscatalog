@@ -45,6 +45,11 @@ public class ProductServiceTests {
     private Category category;
     private ProductDTO productDTO;
     private PageImpl<Product> page;
+
+    /**
+     * simulando comportamentos
+     * @throws Exception
+     */
     @BeforeEach
     void setUp() throws Exception {
         existingID = 1L;
