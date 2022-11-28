@@ -2,7 +2,6 @@ package com.zihenx.dscatalog.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -28,11 +27,12 @@ public class Product implements Serializable {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant date;
 
-    @ManyToMany //-> muitos pra muitos
-    @JoinTable( //-> mapeando no banco de dados - criando uma terceira tabela com as ligações
-        name = "tb_product_category", // nome da tabela que fará a associação das entidades
-        joinColumns = @JoinColumn(name = "product_id"), // -> nome da coluna que refenrencia a entidade que esta sendo mapeada
-        inverseJoinColumns = @JoinColumn(name = "category_id") // nome da coluna que referencia a outra entidade
+    @ManyToMany // -> muitos pra muitos
+    @JoinTable( // -> mapeando no banco de dados - criando uma terceira tabela com as ligações
+            name = "tb_product_category", // nome da tabela que fará a associação das entidades
+            joinColumns = @JoinColumn(name = "product_id"), // -> nome da coluna que refenrencia a entidade que esta
+                                                            // sendo mapeada
+            inverseJoinColumns = @JoinColumn(name = "category_id") // nome da coluna que referencia a outra entidade
     )
     Set<Category> categories = new HashSet<>(); // set para conjunto que não permite repetições
 
@@ -103,8 +103,10 @@ public class Product implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Product product)) return false;
+        if (this == o)
+            return true;
+        if (!(o instanceof Product product))
+            return false;
         return getId().equals(product.getId());
     }
 
