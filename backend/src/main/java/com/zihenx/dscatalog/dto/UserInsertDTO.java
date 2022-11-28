@@ -1,5 +1,8 @@
 package com.zihenx.dscatalog.dto;
 
+import com.zihenx.dscatalog.services.validation.UserInsertValid;
+
+@UserInsertValid
 public class UserInsertDTO extends UserDTO {
     private static final long serialVErsionUID = 1L;
 

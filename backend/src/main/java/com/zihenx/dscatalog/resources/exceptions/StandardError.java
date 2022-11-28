@@ -2,7 +2,11 @@ package com.zihenx.dscatalog.resources.exceptions;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
+/**
+ * Classe de usada para personalizar errors
+ */
 public class StandardError implements Serializable {
     private static final long serialVersionUID = 1L;
 
