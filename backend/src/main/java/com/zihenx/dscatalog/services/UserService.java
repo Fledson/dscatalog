@@ -2,6 +2,7 @@ package com.zihenx.dscatalog.services;
 
 import com.zihenx.dscatalog.dto.UserDTO;
 import com.zihenx.dscatalog.dto.UserInsertDTO;
+import com.zihenx.dscatalog.dto.UserUpdateDTO;
 import com.zihenx.dscatalog.entities.Category;
 import com.zihenx.dscatalog.entities.Role;
 import com.zihenx.dscatalog.entities.User;
@@ -61,7 +62,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserDTO dto) {
+    public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
 
             User entity = repository.getReferenceById(id);
