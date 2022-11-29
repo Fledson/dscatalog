@@ -15,7 +15,6 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 @Configuration
@@ -56,8 +55,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients
-                .inMemory()
+        clients.inMemory()
                 // nome da aplicação
                 .withClient(clientId)
                 // senha da aplicação
