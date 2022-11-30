@@ -45,13 +45,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private jwtTokenEnhancer tokenEnhancer;
 
+    /**
+     * Configurar a segurança do Servidor de Autorização, em termos práticos o
+     * endpoint /oauth/token.
+     */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
     }
 
     /**
-     * define como será a autenticação e quais são os dados do cliente
+     * define como será a autenticação da aplicação e quais são os dados do
+     * cliente(Cliente, a aplicação que solicita os dados)
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -69,18 +74,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     /**
-     * Configura quem vai ser autorizado e o formato do token
-     *
-     * @param endpoints
-     * @throws Exception
+     * configura o tratamento de segurança para liberação dos endpoints a aplicação
+     * que ta solicitando via chave
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
-        /** Configuração para colocar dados adicionais no token*/
+        /** Configuração para colocar dados adicionais no token */
         // instanciando o "melhorador" do token
         TokenEnhancerChain chain = new TokenEnhancerChain();
-        // adicionando as "melhorias" em formato de lista, passando o conversor do token e as melhorias
+        // adicionando as "melhorias" em formato de lista, passando o conversor do token
+        // e as melhorias
         chain.setTokenEnhancers(Arrays.asList(accessTokenConverter, tokenEnhancer));
 
         endpoints

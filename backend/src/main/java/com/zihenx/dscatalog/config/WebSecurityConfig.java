@@ -17,11 +17,13 @@ public class WebSecurityConfig {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
+    /** Bean para criptografar a senha */
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /** Converte o token da aplicação */
     @Bean
     JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
@@ -29,13 +31,15 @@ public class WebSecurityConfig {
         return tokenConverter;
     }
 
+    /** Armazena o token convertido */
     @Bean
     JwtTokenStore tokenStore() {
         return new JwtTokenStore(accessTokenConverter());
     }
 
     @Bean
-    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 }

@@ -13,7 +13,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import java.util.Arrays;
 
 @Configuration
-@EnableResourceServer // anotação que processa a configuração para que essa classe implemente as funções do resourcer server
+@EnableResourceServer // anotação que processa a configuração para que essa classe implemente as
+                      // funções do resourcer server
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Autowired
@@ -22,16 +23,16 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private JwtTokenStore tokenStore;
 
+    /* STRINGS COM AS REGRAS */
     // endpoints publicos (h2-console libera acesso ao h2)
-    private static final String[] PUBLIC = {"/oauth/token", "/h2-console/**"};
+    private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
     // endpoints para quem é operador e adm
-    private static final String[] OPERADOR_OR_ADMIN = {"/products/**", "/categories/**"};
+    private static final String[] OPERADOR_OR_ADMIN = { "/products/**", "/categories/**" };
     // endpoints para que é apenas adm
-    private static final String[] ADMIN = {"/users/**"};
-
+    private static final String[] ADMIN = { "/users/**" };
 
     /**
-     * Configuração do token
+     * Recebe o token da aplicação
      * deixa ele capaz de identificar o token e trabalhar com ele
      */
     @Override
@@ -40,9 +41,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     }
 
     /**
-     * Configuração das rotas
-     * @param http
-     * @throws Exception
+     * Configuração das rotas - Configura as regras de acessos para os endpoints com
+     * segurança ou sem
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -55,9 +55,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.authorizeRequests()
                 // liberando as rotas publicas
                 .antMatchers(PUBLIC).permitAll()
-                // liberando GET para as rotas OPERADOR_OR_ADMIN para todos do perfil * apenas quem for
+                // liberando GET para as rotas OPERADOR_OR_ADMIN para todos do perfil * apenas
+                // quem for
                 .antMatchers(HttpMethod.GET, OPERADOR_OR_ADMIN).permitAll()
-                // liberando as rotas OPERADOR_OR_ADMIN quando tiver alguma role do tipo "ADMIN" ou "OPERATOR" (perfils pegos do banco)
+                // liberando as rotas OPERADOR_OR_ADMIN quando tiver alguma role do tipo "ADMIN"
+                // ou "OPERATOR" (perfils pegos do banco)
                 .antMatchers(OPERADOR_OR_ADMIN).hasAnyRole("OPERATOR", "ADMIN")
                 // liberando as rotas ADMIN quem tiver logado com o perfil ADMIN
                 .antMatchers(ADMIN).hasRole("ADMIN")

@@ -3,10 +3,8 @@ package com.zihenx.dscatalog.services;
 import com.zihenx.dscatalog.dto.UserDTO;
 import com.zihenx.dscatalog.dto.UserInsertDTO;
 import com.zihenx.dscatalog.dto.UserUpdateDTO;
-import com.zihenx.dscatalog.entities.Category;
 import com.zihenx.dscatalog.entities.Role;
 import com.zihenx.dscatalog.entities.User;
-import com.zihenx.dscatalog.repositories.CategoryRepository;
 import com.zihenx.dscatalog.repositories.RoleRepository;
 import com.zihenx.dscatalog.repositories.UserRepository;
 import com.zihenx.dscatalog.services.exceptions.DatabaseException;
@@ -63,7 +61,7 @@ public class UserService implements UserDetailsService {
     public UserDTO insert(UserInsertDTO dto) {
         User entity = new User();
         copyDtoToEntity(dto, entity);
-        entity.setPassword( passwordEncoder.encode(dto.getPassword()) ); // mascarando a senha com o encoder
+        entity.setPassword(passwordEncoder.encode(dto.getPassword())); // mascarando a senha com o encoder
         entity = repository.save(entity);
 
         return new UserDTO(entity);
@@ -98,9 +96,9 @@ public class UserService implements UserDetailsService {
 
     private void copyDtoToEntity(UserDTO dto, User entity) {
 
-       entity.setFirstName(dto.getFirstName());
-       entity.setLastName(dto.getLastName());
-       entity.setEmail(dto.getEmail());
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
+        entity.setEmail(dto.getEmail());
 
         entity.getRoles().clear();
         dto.getRoles().forEach(catDto -> {
@@ -113,7 +111,9 @@ public class UserService implements UserDetailsService {
 
     /**
      * pesquisa um usuario no banco por email
-     * @param username -> username definido na implementação do UserDetails lá na criação do User
+     * 
+     * @param username -> username definido na implementação do UserDetails lá na
+     *                 criação do User
      * @return user -> um usuario do tipo User já que esse implementa UserDetails
      * @throws UsernameNotFoundException
      */
