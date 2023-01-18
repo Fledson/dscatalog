@@ -37,6 +37,8 @@ public class WebSecurityConfig {
         return new JwtTokenStore(accessTokenConverter());
     }
 
+    // na versão 2.7.3 do spring faz assim como AuthenticationManager
+    // só importa o bean e ele automaticamente já configura o userdetailservice
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
             throws Exception {

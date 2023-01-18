@@ -61,7 +61,7 @@ public class ProductResourceTests {
          * quando chamar o findAllPaged com qualquer argumento tem que retornar um pageimpl do tipo productDTO
          * o any ⇾ qualquer argumento (metodoto do mockito)
          */
-        when(service.findAllPaged(any())).thenReturn(page);
+        when(service.findAllPaged(0L, any())).thenReturn(page);
 
         /**
          * quando chamar o findById e o id existir deve trazer um productDTO
